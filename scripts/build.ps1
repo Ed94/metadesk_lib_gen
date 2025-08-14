@@ -102,12 +102,13 @@ if ( $cannot_build ) {
 write-host "Build Type: $(if ($release) {"Release"} else {"Debug"} )"
 
 $path_build          = join-path $path_root     build
-$path_code           = join-path $path_root     code
 $path_examples       = join-path $path_root     examples
 $path_gen_c11        = join-path $path_root     gen_c11
 $path_gen_cpp17      = join-path $path_root     gen_cpp17
 $path_metadesk       = join-path $path_root     metadesk
-$path_tests          = join-path $path_metadesk tests
+$path_source         = join-path $path_metadesk source
+$path_metadesk_tests = join-path $path_metadesk tests
+$path_tests          = join-path $path_root     tests
 $path_third_party    = join-path $path_root     third_party
 $path_md_third_party = join-path $path_metadesk third_party
 
@@ -125,10 +126,10 @@ if ($compile_sanity)
 	$linker_args = @()
 	$linker_args += $flag_link_win_subsystem_console
 
-	$path_base = join-path $path_code base
+	$path_base = join-path $path_source base
 
-	$includes   = @( $path_base )
-	$unit       = join-path $path_code  'metadesk.c'
+	$includes   = @( $path_source, $path_md_third_party, $path_root, $path_metadesk )
+	$unit       = join-path $path_source  'metadesk.c'
 	$executable = join-path $path_build 'metadesk.lib'
 
 	$result = build-simple $path_build $includes $compiler_args $linker_args $unit $executable
@@ -146,7 +147,7 @@ if ($code_sanity)
 	$linker_args = @()
 	$linker_args += $flag_link_win_subsystem_console
 
-	$includes   = @( $path_code, $path_root )
+	$includes   = @( $path_source, $path_md_third_party, $path_root, $path_metadesk )
 	$unit       = join-path $path_tests 'code_sanity.c'
 	$executable = join-path $path_build 'code_sanity.exe'
 
@@ -268,8 +269,8 @@ if ($sanity_tests)
 	$path_gen = join-path $path_gen_c11 'gen'
 
 	$includes   = @( $path_gen, $path_root )
-	$unit       = join-path $path_tests  'sanity_tests.c'
-	$executable = join-path $path_build  'sanity_tests.exe'
+	$unit       = join-path $path_metadesk_tests 'sanity_tests.c'
+	$executable = join-path $path_build          'sanity_tests.exe'
 
 	$result = build-simple $path_build $includes $compiler_args $linker_args $unit $executable
 

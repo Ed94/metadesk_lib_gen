@@ -1,4 +1,5 @@
 ﻿gen_c11/gen
 build
 scripts/system_details.ini
-metadesk/
+# metadesk/
+.vscode/settings.json

@@ -2,6 +2,8 @@
 
 #include "gen_common.h"
 
+#pragma warning(disable: 4133) // TODO(Ed): Review
+
 #ifndef GENERATE_SEGREGATED
 #define GENERATE_SEGEREGATED 1
 #endif

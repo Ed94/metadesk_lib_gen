@@ -217,7 +217,7 @@ void register_library_macros()
 		((gen_Macro) { lit("md_prof_msg"),             MT_Expression, MF_Functional }),
 		((gen_Macro) { lit("md_prof_begin_function"),  MT_Expression, MF_Functional }),
 		((gen_Macro) { lit("md_prof_scope"),           MT_Expression, MF_Functional }),
-		((gen_Macro) { lit("md_prof_scope"),           MT_Expression, MF_Functional }),
+		((gen_Macro) { lit("md_prof_scope"),           MT_Expression, MF_Functional })
 	));
 	// base/base_types.h
 	gen_register_macros(args(
